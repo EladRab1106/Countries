@@ -1,5 +1,5 @@
-window.onload = function() {setTimeout(function() {document.querySelector('.loader').style.display='none'},3000);};
-function getCountryParameter() {
+// window.onload = function() {setTimeout(function() {document.querySelector('.loader').style.display='none'},3000);};
+const getCountryParameter=()=> {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('country');  // Returns the value of 'country' (e.g., 'USA')
   }
@@ -85,6 +85,7 @@ function getCountryParameter() {
                 countryInfo(country);
             }
         });
+        setTimeout(function() {document.querySelector('.loader').style.display='none'},500)
             
     })
       
