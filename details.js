@@ -1,10 +1,7 @@
-// window.onload = function() {setTimeout(function() {document.querySelector('.loader').style.display='none'},3000);};
 const getCountryParameter=()=> {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('country');  // Returns the value of 'country' (e.g., 'USA')
   }
-  
-  
     
         fetch('./CountriesData.json')
         .then((response) => {

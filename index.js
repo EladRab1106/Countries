@@ -148,6 +148,7 @@ const darkMode=()=>{
     const dropDownHeader = document.getElementsByClassName('dropdown-header')[0];
     const dropB= document.getElementById('dropB');
     const countryTitle = document.querySelectorAll('.country-title');
+    const dropDownBody = document.getElementsByClassName('dropdown-body')[0];
 
     body.style.backgroundColor = 'hsl(207, 26%, 17%)';
     header.style.backgroundColor = 'hsl(209, 23%, 22%)';
@@ -169,6 +170,7 @@ const darkMode=()=>{
     countryTitle.forEach((title)=>{
         title.style.color='white';
     })
+    dropDownBody.style.backgroundColor = 'hsl(209, 23%, 22%)';
     
    
 
