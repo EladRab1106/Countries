@@ -1,18 +1,8 @@
 let countriesData = [];
 let GeneralCountriesCode;
 let GetAllCountries;
-let GetAfricaCountries;
-let GetAsiaCountries;
-let GetEuropeCountries;
-let GetAmericasCountries;
-let GetOceaniaCountries;
 let FilteredCountries;
 let AllFilter=document.getElementById('All');
-let EuropeFilter=document.getElementById('Europe'); 
-let AfricaFilter=document.getElementById('Africa');
-let AsiaFilter=document.getElementById('Asia');
-let AmericasFilter=document.getElementById('Americas');
-let OceaniaFilter=document.getElementById('Oceania');
 let dark;
 fetch('./CountriesData.json')
   .then((response) => {
@@ -23,7 +13,6 @@ fetch('./CountriesData.json')
   })
   .then((countries) => {
     FilteredCountries = countries;
-    countriesData = countries;
     const countryContainer = document.querySelector('.countries-grid');
     GeneralCountriesCode=(FilteredCountries)=>{
     FilteredCountries.forEach((country) => {    
@@ -71,46 +60,24 @@ if(dark){
         hideDropDown();
     }
     AllFilter.addEventListener('click', GetAllCountries);
-    GetAfricaCountries = () => {
-        FilteredCountries = countries.filter((country) => country.region === 'Africa');
+    GetCountryByRegion = (region) => {    
+        FilteredCountries = countries.filter((country) => country.region === region);
         const countryContainer = document.querySelector('.countries-grid');
         countryContainer.innerHTML = '';
         GeneralCountriesCode(FilteredCountries);
-        hideDropDown();
     }
-    AfricaFilter.addEventListener('click', GetAfricaCountries);
-    GetAsiaCountries = () => {
-        FilteredCountries = countries.filter((country) => country.region === 'Asia');
-        const countryContainer = document.querySelector('.countries-grid');
-        countryContainer.innerHTML = '';
-        GeneralCountriesCode(FilteredCountries);
-        hideDropDown();
-    }
-    AsiaFilter.addEventListener('click', GetAsiaCountries);
-    GetEuropeCountries = () => {
-        FilteredCountries = countries.filter((country) => country.region === 'Europe');
-        const countryContainer = document.querySelector('.countries-grid');
-        countryContainer.innerHTML = '';
-        GeneralCountriesCode(FilteredCountries);
-        hideDropDown();
-    }
-    EuropeFilter.addEventListener('click', GetEuropeCountries);
-    GetAmericasCountries = () => {
-        FilteredCountries = countries.filter((country) => country.region === 'Americas');
-        const countryContainer = document.querySelector('.countries-grid');
-        countryContainer.innerHTML = '';
-        GeneralCountriesCode(FilteredCountries);
-        hideDropDown();
-    }
-    AmericasFilter.addEventListener('click', GetAmericasCountries);
-    GetOceaniaCountries = () => {
-        FilteredCountries = countries.filter((country) => country.region === 'Oceania');
-        const countryContainer = document.querySelector('.countries-grid');
-        countryContainer.innerHTML = '';
-        GeneralCountriesCode(FilteredCountries);
-        hideDropDown();
-    }
-    OceaniaFilter.addEventListener('click', GetOceaniaCountries);
+    document.querySelectorAll('.Region').forEach((region) => {
+        if(region.getAttribute('id')==='All'){
+            
+
+        }
+        else{
+        region.addEventListener('click', (e) => {
+            const region = e.target.getAttribute('id');
+            GetCountryByRegion(region);
+            hideDropDown();
+
+    })}})
     const searchInput = document.getElementById('input');
     searchInput.addEventListener('input', (e) => {
         const searchValue = e.target.value;
@@ -120,63 +87,61 @@ if(dark){
         GeneralCountriesCode(FilteredCountries);
     });
 
-
-
+    const presentDropDown=()=>{
+        const dropDownBody = document.getElementsByClassName('dropdown-body')[0];
+        dropDownBody.style.visibility = 'visible';
+        dropDownBody.style.opacity = '1';
+    }
+    const hideDropDown=()=>{
+        const dropDownBody = document.getElementsByClassName('dropdown-body')[0];
+        dropDownBody.style.visibility = 'hidden';
+        dropDownBody.style.opacity = '0';
+    }
+    const darkMode=()=>{
+        dark=true;
+        const body = document.body;
+        const header = document.querySelector('header');
+        const li=document.querySelectorAll('li');
+        const strong=document.querySelectorAll('strong');
+        const searchInput = document.getElementById('input');
+        const dropDownHeader = document.getElementsByClassName('dropdown-header')[0];
+        const dropB= document.getElementById('dropB');
+        const countryTitle = document.querySelectorAll('.country-title');
+        const dropDownBody = document.getElementsByClassName('dropdown-body')[0];
+    
+        body.style.backgroundColor = 'hsl(207, 26%, 17%)';
+        header.style.backgroundColor = 'hsl(209, 23%, 22%)';
+        
+        const countryInfo = document.querySelectorAll('.country-info');
+        countryInfo.forEach((info) => {
+            info.style.backgroundColor = 'hsl(209, 23%, 22%)';
+        })
+        li.forEach((list)=>{
+            list.style.color='gray';
+        });
+        strong.forEach((strong)=>{
+            strong.style.color='white';
+        });
+        searchInput.style.backgroundColor = 'hsl(209, 23%, 22%)';
+        searchInput.style.color = 'gray';
+        dropDownHeader.style.backgroundColor = 'hsl(209, 23%, 22%)';
+        dropB.style.color = 'gray';
+        countryTitle.forEach((title)=>{
+            title.style.color='white';
+        })
+        dropDownBody.style.backgroundColor = 'hsl(209, 23%, 22%)';
+    }
+    document.getElementById('dark-mode').addEventListener('click', darkMode);
+    document.getElementById('dropB').addEventListener('click', presentDropDown);
 
 })
 
      
   .catch((error) => console.error('Error loading JSON:', error));
 
- const presentDropDown=()=>{
-    const dropDownBody = document.getElementsByClassName('dropdown-body')[0];
-    dropDownBody.style.visibility = 'visible';
-    dropDownBody.style.opacity = '1';
-}
-const hideDropDown=()=>{
-    const dropDownBody = document.getElementsByClassName('dropdown-body')[0];
-    dropDownBody.style.visibility = 'hidden';
-    dropDownBody.style.opacity = '0';
-}
-const darkMode=()=>{
-    dark=true;
-    const body = document.body;
-    const header = document.querySelector('header');
-    const li=document.querySelectorAll('li');
-    const strong=document.querySelectorAll('strong');
-    const searchInput = document.getElementById('input');
-    const dropDownHeader = document.getElementsByClassName('dropdown-header')[0];
-    const dropB= document.getElementById('dropB');
-    const countryTitle = document.querySelectorAll('.country-title');
-    const dropDownBody = document.getElementsByClassName('dropdown-body')[0];
-
-    body.style.backgroundColor = 'hsl(207, 26%, 17%)';
-    header.style.backgroundColor = 'hsl(209, 23%, 22%)';
-    
-    const countryInfo = document.querySelectorAll('.country-info');
-    countryInfo.forEach((info) => {
-        info.style.backgroundColor = 'hsl(209, 23%, 22%)';
-    })
-    li.forEach((list)=>{
-        list.style.color='gray';
-    });
-    strong.forEach((strong)=>{
-        strong.style.color='white';
-    });
-    searchInput.style.backgroundColor = 'hsl(209, 23%, 22%)';
-    searchInput.style.color = 'gray';
-    dropDownHeader.style.backgroundColor = 'hsl(209, 23%, 22%)';
-    dropB.style.color = 'gray';
-    countryTitle.forEach((title)=>{
-        title.style.color='white';
-    })
-    dropDownBody.style.backgroundColor = 'hsl(209, 23%, 22%)';
-    
-   
-
-}
 
 
+  
 
 
 
