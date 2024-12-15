@@ -147,6 +147,8 @@ const darkMode=()=>{
     const searchInput = document.getElementById('input');
     const dropDownHeader = document.getElementsByClassName('dropdown-header')[0];
     const dropB= document.getElementById('dropB');
+    const countryTitle = document.querySelectorAll('.country-title');
+
     body.style.backgroundColor = 'hsl(207, 26%, 17%)';
     header.style.backgroundColor = 'hsl(209, 23%, 22%)';
     
@@ -164,6 +166,10 @@ const darkMode=()=>{
     searchInput.style.color = 'gray';
     dropDownHeader.style.backgroundColor = 'hsl(209, 23%, 22%)';
     dropB.style.color = 'gray';
+    countryTitle.forEach((title)=>{
+        title.style.color='white';
+    })
+    
    
 
 }
